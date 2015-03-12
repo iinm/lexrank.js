@@ -15,7 +15,7 @@ function lexrank(text, params) {
   var sents = params.sent_splitter(text);
   //console.log(sents);
 
-  // centence -> tf vector
+  // sentence -> tf vector
   var word2id = {};
   var word_id = 0;
   var tf_vecs = [];
@@ -31,7 +31,7 @@ function lexrank(text, params) {
   //console.log(tf_vecs.length);
   //console.log(word2id);
 
-  // compute similarity between centences and prepare graph.
+  // compute similarity between sentences and prepare graph.
 
   // tools
   var values = function(obj) {
