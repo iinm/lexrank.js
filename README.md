@@ -1,8 +1,13 @@
 # lexrank.js
 
-LexRank (Text summarization) in JavaScript
+LexRank (Text summarization / テキスト要約) in JavaScript
 
 - requires [pagerank.js](https://github.com/iinm/pagerank.js)
+
+## Demo
+
+- <a href="http://iinm.github.io/lexrank.js/" target="_blank">Japanese / 日本語</a>
+- English / 英語 (preparing)
 
 ## Usage
 
