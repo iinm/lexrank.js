@@ -3,22 +3,14 @@
 // Node.js
 //var pagerank = require('./pagerank.js');
 
-function lexrank(text, params) {
+function lexrank(sentences, params) {
 
   // set default parameters
-  if (params == null) params = {};
+  //if (params == null) params = {};
   if (params.pagerank == null) params.pagerank = {}; // see pagerank.js
   if (params.threshold == null) params.threshold = .1;
   if (params.idf == null) params.idf = {};
-  if (params.sort_comparator == null) { // result
-    params.sort_comparator = function(a, b) {
-      return b.score - a.score;
-    };
-  }
-
-  // text -> sentences
-  var sents = params.sent_splitter(text);
-  //console.log(sents);
+  if (params.sort_by_score == null) params.sort_by_score = true; // result
 
   // sentence -> tf vector  // need reveiew
   var word2id = {}; var id2word = [];
@@ -35,7 +27,7 @@ function lexrank(text, params) {
     return tfidf;
   };
 
-  sents.forEach(function(s) {
+  sentences.forEach(function(s) {
     var tf = [];
     params.word_segmenter(s).forEach(function(w) {
       if (word2id[w] == null) {
@@ -82,12 +74,17 @@ function lexrank(text, params) {
     return a / b;
   };
 
+  //var similarities = [];
   var graph = {};
-  for (var i = 0; i < sents.length; i++) graph[i] = [];
+  for (var i = 0; i < sentences.length; i++) {
+    graph[i] = [];
+    //similarities[i] = [];
+  }
 
-  for (var i = 0; i < sents.length; i++) {
-    for (var j = i + 1; j < sents.length; j++) {
+  for (var i = 0; i < sentences.length; i++) {
+    for (var j = i + 1; j < sentences.length; j++) {
       var score = cos_sim(tfidf_vecs[i], tfidf_vecs[j]);
+      //similarities[i][j] = score;
       if (score >= params.threshold) {
         graph[i].push(j);
         graph[j].push(i);
@@ -100,14 +97,19 @@ function lexrank(text, params) {
   var score = pagerank(graph, params.pagerank);
   //console.log(score);
 
-  // bundle meta data
-  sents_meta = [];
-  for (var i = 0; i < sents.length; i++) {
-    sents_meta.push(
-        {idx: i, sent: sents[i], score: score[i], tfidf_vec: tfidf_vecs[i]});
+  var sents_meta = [];
+  for (var i = 0; i < sentences.length; i++) {
+    //sents_meta.push({idx: i, score: score[i], sims: similarities[i]});
+    sents_meta.push({idx: i, score: score[i]});
   }
 
- return sents_meta.sort(params.sort_comparator);
+  if (params.sort_by_score == true) {
+    sents_meta.sort(function(a, b) {
+      return b.score - a.score;
+    });
+  }
+
+  return sents_meta;
 }
 
 // for Node.js

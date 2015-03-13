@@ -23,22 +23,21 @@ var word_segmenter = function(sent) {
            .filter(function(w) { return stopwords[w] == null; })
 }
 
-var result = lexrank(text, {sent_splitter: sent_splitter,
-                            word_segmenter: word_segmenter});
+var sentences = sent_splitter(text);
+var result = lexrank(sentences, {word_segmenter: word_segmenter});
 
 //console.log(result);
 console.log('# (score, index)  sentence');
-result.forEach(function(sent) {
-  console.log('(' + sent.score + ', ' + sent.idx + ')  ' + sent.sent);
+result.forEach(function(meta) { // sorted by score
+  console.log('(' + meta.score + ', ' + meta.idx + ')  ' + sentences[meta.idx]);
 });
 
 
 // test idf param
-var result = lexrank(text, {sent_splitter: sent_splitter,
-                            word_segmenter: word_segmenter,
-                            idf: {'オブジェクト': 1.5, '指向': 1.7}});
+var result = lexrank(sentences, {word_segmenter: word_segmenter,
+                                 idf: {'オブジェクト': 1.5, '指向': 1.5}});
 
 console.log('\n# (score, index)  sentence');
-result.forEach(function(sent) {
-  console.log('(' + sent.score + ', ' + sent.idx + ')  ' + sent.sent);
+result.forEach(function(meta, i) { // sorted by score
+  console.log('(' + meta.score + ', ' + meta.idx + ')  ' + sentences[meta.idx]);
 });

@@ -31,30 +31,31 @@ Apply LexRank.
 // example (http://ja.wikipedia.org/wiki/JavaScript)
 
 var text = 'JavaScript（ジャヴァスクリプト）とは、プログラミング言語のひとつである。Javaと名前が似ているが、...';
+var sentences = sent_splitter_ja(text);
 
-var result = lexrank(text, {sent_splitter: sent_splitter_ja,
-                            word_segmenter: word_segmenter_ja});
+var result = lexrank(sentences, {word_segmenter: word_segmenter_ja});
 
 console.log('# (score, index)  sentence');
-result.forEach(function(sent) {
-  console.log('(' + sent.score + ', ' + sent.idx + ')  ' + sent.sent);
+result.forEach(function(meta) { // sorted by score
+  console.log('(' + meta.score + ', ' + meta.idx + ')  ' + sentences[meta.idx]);
 });
 
 // output
 // # (score, index)  sentence
 // (0.08698999355586459, 0)  JavaScript（ジャヴァスクリプト）とは、プログラミング言語のひとつである。
 // (0.08698999355586459, 9)  広義の意味でこれをJavaScriptと呼ぶ場合、主要なブラウザが実装しているスクリプト言語はマイクロソフトやGoogle, Appleの実装も含めてJavaScriptである。
+// (0.08698999355586459, 4)  JavaScriptという言葉は狭義にはMozillaが仕様を策定し実装しているスクリプト言語を指す。
 // ...
 ```
 
 ## Default Parameters
 
 ```javascript
-var result = lexrank(text, {sent_splitter: (required),
-                            word_segmenter: (required),
-                            idf: {}, // used when compute cos similarity
-                            threshold: 0.1, // cos similarity
-                            pagerank: { alpha: 0.85,
-                                        tol: 1.0e-6,
-                                        max_iter: 100 }});
+var result = lexrank(sentences, {word_segmenter: (required),
+                                 idf: {}, // used when compute cos similarity
+                                 threshold: 0.1, // cos similarity
+                                 sort_by_score: true, // result
+                                 pagerank: { alpha: 0.85,
+                                             tol: 1.0e-6,
+                                             max_iter: 100 }});
 ```
