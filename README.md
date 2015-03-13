@@ -7,7 +7,7 @@ LexRank (Text summarization / テキスト要約) in JavaScript
 ## Demo
 
 - <a href="http://iinm.github.io/lexrank.js/" target="_blank">Japanese / 日本語</a>
-- English / 英語 (preparing)
+- <a href="http://iinm.github.io/lexrank.js/index_en.html" target="_blank">English / 英語</a>
 
 ## Usage
 
