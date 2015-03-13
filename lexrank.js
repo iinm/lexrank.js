@@ -7,9 +7,13 @@ function lexrank(text, params) {
 
   // set default parameters
   if (params == null) params = {};
-  if (params.pagerank == null) params.pagerank = {};
+  if (params.pagerank == null) params.pagerank = {}; // see pagerank.js
   if (params.threshold == null) params.threshold = .1;
-  if (params.sort == null) params.sort = true;
+  if (params.sort_comparator == null) { // result
+    params.sort_comparator = function(a, b) {
+      return b.score - a.score;
+    };
+  }
 
   // text -> sentences
   var sents = params.sent_splitter(text);
@@ -31,7 +35,7 @@ function lexrank(text, params) {
   //console.log(tf_vecs.length);
   //console.log(word2id);
 
-  // compute similarity between sentences and prepare graph.
+  // compute similarities between sentences and prepare a graph.
 
   // tools
   var values = function(obj) {
@@ -47,17 +51,13 @@ function lexrank(text, params) {
   };
 
   var norm = function(xs) {
-    var xs2 = [];
-    //xs.forEach(function(x) { xs2.push(x * x); });
-    //return Math.sqrt(sum(xs2));
     return Math.sqrt(sum(xs.map(function(v, i, all) { return v * v; })));
   };
 
   var cos_sim = function(tf1, tf2) {
     if (Object.keys(tf1).length == 0 || Object.keys(tf2).length == 0)
       return 0;
-
-    var a = .0;
+    var a = 0;
     Object.keys(tf1).forEach(function(w) {
       a += tf1[w] * ((tf2[w] != null) ? tf2[w] : 0);
     });
@@ -91,15 +91,8 @@ function lexrank(text, params) {
         {idx: i, sent: sents[i], score: score[i], tf_vec: tf_vecs[i]});
   }
 
-  if (params.sort == true) {
-    sents_meta.sort(function(a, b) {
-      return b.score - a.score;
-    });
-  }
-
-  return sents_meta;
-
+ return sents_meta.sort(params.sort_comparator);
 }
 
 // for Node.js
-module.exports = lexrank;
+//module.exports = lexrank;
