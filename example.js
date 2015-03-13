@@ -31,3 +31,14 @@ console.log('# (score, index)  sentence');
 result.forEach(function(sent) {
   console.log('(' + sent.score + ', ' + sent.idx + ')  ' + sent.sent);
 });
+
+
+// test idf param
+var result = lexrank(text, {sent_splitter: sent_splitter,
+                            word_segmenter: word_segmenter,
+                            idf: {'オブジェクト': 1.5, '指向': 1.7}});
+
+console.log('\n# (score, index)  sentence');
+result.forEach(function(sent) {
+  console.log('(' + sent.score + ', ' + sent.idx + ')  ' + sent.sent);
+});

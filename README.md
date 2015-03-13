@@ -52,6 +52,7 @@ result.forEach(function(sent) {
 ```javascript
 var result = lexrank(text, {sent_splitter: (required),
                             word_segmenter: (required),
+                            idf: {}, // used when compute cos similarity
                             threshold: 0.1, // cos similarity
                             pagerank: { alpha: 0.85,
                                         tol: 1.0e-6,
