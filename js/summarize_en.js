@@ -33,9 +33,9 @@ function summarize() {
   result.sort(function(a, b) { return a.idx - b.idx; });
 
   var score2color = function(s) { // need review
-    // [0,1] -> [6,0] -> #nnnnnn
+    // [0,1] -> [9,0] -> #nnnnnn
     var c = '#';
-    var n = Math.floor((1 - s) * 6);
+    var n = Math.floor((1 - s) * 9);
     for (var i = 0; i < 6; i++) c += n;
     return c;
   }
