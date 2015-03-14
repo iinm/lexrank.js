@@ -1,4 +1,6 @@
 // lexrank.js
+// Copyright 2015 Shumpei IINUMA
+// lexrank.js is freely distributable under the terms of the MIT license.
 
 // Node.js
 //var pagerank = require('./pagerank.js');
