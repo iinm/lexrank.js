@@ -6,6 +6,9 @@ LexRank (Text summarization / テキスト要約) in JavaScript
 
 ## Demo
 
+Demo application runs on client-side JavaScript. Input text is not sent to the server.
+/ クライアントサイドで動作します．入力されたテキストはサーバに送信されません．
+
 - <a href="http://iinm.github.io/lexrank.js/" target="_blank">Japanese / 日本語</a>
 - <a href="http://iinm.github.io/lexrank.js/index_en.html" target="_blank">English / 英語</a>
 
