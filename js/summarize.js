@@ -20,9 +20,9 @@ function summarize() {
       .map(function(w) { return w.trim(); })
       .filter(function(w) {
         return (stopwords[w] == null && w.length > 0 &&
-                ! /^[１２３４５６７８９０！＠＃＄％＾＆＊（）ー＝＋｜〜：；「」’”，、。，．＜＞\d!@#$%\^&*()\-=+\|~\[\]'":;,.?/<>]+$/.test(w));
+            ! /^[\s!-@\[-`\{-~　、-〜！-＠［-｀]+$/.test(w));
       });
-  }
+  };
 
   var sentences = sent_splitter(text);
   var result = lexrank(sentences, {word_segmenter: word_segmenter})
@@ -47,7 +47,7 @@ function summarize() {
     //console.log(meta.score + ' ' + score_norm);
     var color = score2color(score_norm);
     //console.log(color);
-    summary += '<span style="color:' + color + '">' + sentences[meta.idx] + '</span>';
+    summary += '<span style="color:' + color + '"> ' + sentences[meta.idx] + '</span>';
   });
   document.getElementById('output').innerHTML = '';
   document.getElementById('output').innerHTML =
