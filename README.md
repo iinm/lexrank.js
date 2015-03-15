@@ -1,10 +1,12 @@
 # lexrank.js
 
-LexRank (Text summarization / テキスト要約) in JavaScript
+LexRank in JavaScript
 
 - requires [pagerank.js](https://github.com/iinm/pagerank.js)
 
-## Demo
+## Demo application
+
+### Automatic text summarization / テキスト自動要約
 
 Demo application runs on client-side JavaScript. Input text is not sent to the server.
 / クライアントサイドで動作します．入力されたテキストはサーバに送信されません．
@@ -52,8 +54,7 @@ result.forEach(function(meta) { // sorted by score
 // # (score, index)  sentence
 // (0.10937976019163632, 9)  広義の意味でこれをJavaScriptと呼ぶ場合、主要なブラウザが実装しているスクリプト言語はマイクロソフトやGoogle, Appleの実装も含めてJavaScriptである。
 // (0.10054498012337935, 5)  このスクリプト言語はEcmaインターナショナルでECMAScript (ECMA-262) として標準化されており、多くのWebブラウザー等はこの標準化されたECMAScriptを実装している。
-// (0.09666948892194924, 4)  JavaScriptという言葉は狭義にはMozillaが仕様を策定し実
-装しているスクリプト言語を指す。
+// (0.09666948892194924, 4)  JavaScriptという言葉は狭義にはMozillaが仕様を策定し実装しているスクリプト言語を指す。
 // ...
 ```
 
