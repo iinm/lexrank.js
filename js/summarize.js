@@ -6,7 +6,7 @@ function summarize() {
   //console.log(num_sent);
 
   var sent_splitter = function(text) {
-    _sents = text.replace(/([。．？！]+)/g, '$1|').split('|');
+    _sents = text.replace(/([。．？！\n]+)/g, '$1|').split('|');
 
     // 開いた括弧は必ず閉じる．
     var close2open = {'」': '「', '』': '『', '）': '（'};
