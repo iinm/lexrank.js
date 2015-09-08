@@ -1,6 +1,6 @@
 # lexrank.js
 
-LexRank in JavaScript
+LexRank computes centrality score of sentences.
 
 - requires [pagerank.js](https://github.com/iinm/pagerank.js)
 
