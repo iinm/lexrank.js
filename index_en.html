@@ -51,10 +51,10 @@
     </nav>
 
     <div class="container">
-      <div class="row" style="max-width:800px; margin:auto">
+      <div class="row" style="max-width:60em; margin:auto">
         <br><br>
         <div class="col-xs-12">
-          <textarea id="input" class="form-control" placeholder="Input text (English)" rows="5"></textarea>
+          <textarea id="input" class="form-control" placeholder="Input text to be summarized. (English)" rows="5"></textarea>
             <!--
 Python is a widely used general-purpose, high-level programming language.[17][18][19] Its design philosophy emphasizes code readability, and its syntax allows programmers to express concepts in fewer lines of code than would be possible in languages such as C++ or Java.[20][21] The language provides constructs intended to enable clear programs on both a small and large scale.[22]
 
@@ -66,13 +66,15 @@ CPython, the reference implementation of Python, is free and open-source softwar
             -->
           <br>
 
-          <div style="max-width:320px; align:center; margin:auto">
+          <div style="align:center; margin:auto">
             <div class="input-group">
+              <input id="num_sent" type="text" class="form-control" placeholder="Summary length (the number of sentences)">  <!-- value="4"> -->
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button" onclick="summarize();">Summarize</button>
+                <button class="btn btn-default" type="button" onclick="summarize();">
+                  <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>&nbsp;
+                  Summarize
+                </button>
               </span>
-              <input id="num_sent" type="text" class="form-control" placeholder="in ? sentences. (Input number)">  <!-- value="4"> -->
-              <!--<span class="input-group-addon">sentences.</span>-->
             </div><!-- .input-group -->
           </div>
 

@@ -51,20 +51,23 @@
     </nav>
 
     <div class="container">
-      <div class="row" style="max-width:800px; margin:auto">
+      <div class="row" style="max-width:60em; margin:auto">
         <br><br>
         <div class="col-xs-12">
-          <textarea id="input" class="form-control" placeholder="文章を入力 (Japanese/日本語)" rows="5"></textarea>
+          <textarea id="input" class="form-control" placeholder="要約したい文章を入力 (Japanese/日本語)" rows="5"></textarea>
             <!--
             JavaScript（ジャヴァスクリプト）とは、プログラミング言語のひとつである。Javaと名前が似ているが、異なるプログラミング言語である（後述の#歴史を参照）。オブジェクト指向のスクリプト言語であることを特徴とする。実行環境が主にウェブブラウザに実装され、動的なウェブサイト構築や、リッチインターネットアプリケーションなど高度なユーザインタフェースの開発に用いられる。JavaScriptという言葉は狭義にはMozillaが仕様を策定し実装しているスクリプト言語を指す。このスクリプト言語はEcmaインターナショナルでECMAScript (ECMA-262) として標準化されており、多くのWebブラウザー等はこの標準化されたECMAScriptを実装している。たとえば、マイクロソフトによる実装はJScriptと呼ぶ。一般的にJavaScriptという言葉が使われるときはこのようなさまざまなECMAScriptの実装も含んだ幅広い意味でつかわれるので、どちらの意味でJavaScriptという言葉が使われているかは文脈で判断する必要がある[1]。ECMAScriptは仕様自体に独自の拡張を条件付きで認める記述があり[2]、現在主要なブラウザが実装しているスクリプト言語はすべてECMAScriptに準拠していることになる。広義の意味でこれをJavaScriptと呼ぶ場合、主要なブラウザが実装しているスクリプト言語はマイクロソフトやGoogle, Appleの実装も含めてJavaScriptである。なお、Webブラウザーでよく実装されているAPIであるDOM (Document Object Model) はECMAScriptの仕様の一部ではないので、DOMの準拠の有無はECMAScriptの準拠の有無とは関係ない[3]。読むと長く、またJavaと略すことができない（Javaというプログラム言語がある）。そのため、略し方がたびたび各所で話題になっている。
             -->
           <br>
 
-          <div style="max-width:220px; align:center; margin:auto">
+          <div style="align:center; margin:auto">
             <div class="input-group">
-              <input id="num_sent" type="text" class="form-control" placeholder="数値を入力 (半角)">  <!-- value="4"> -->
+              <input id="num_sent" type="text" class="form-control" placeholder="要約の長さ (文数; 半角数字)">  <!-- value="4"> -->
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button" onclick="summarize();">文で要約</button>
+                <button class="btn btn-default" type="button" onclick="summarize();">
+                  <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>&nbsp;
+                  要約
+                </button>
               </span>
             </div><!-- .input-group -->
           </div>
