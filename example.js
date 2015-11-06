@@ -27,9 +27,24 @@ var word_segmenter_ja = function(sent) {
 };
 
 var sentences = sent_splitter_ja(text);
-var result = lexrank(sentences, {word_segmenter: word_segmenter_ja});
 
-//console.log(result);
+// test LexRank
+console.log('# LexRank');
+var result = lexrank(sentences, {word_segmenter: word_segmenter_ja});
+console.log('# (score, index)  sentence');
+result.forEach(function(meta) { // sorted by score
+  console.log('(' + meta.score + ', ' + meta.idx + ')  ' + sentences[meta.idx]);
+});
+
+// test Continuous LexRank
+console.log('\n# Continuous LexRank');
+var result = lexrank(
+  sentences,
+  {
+    word_segmenter: word_segmenter_ja,
+    continuous: true
+  }
+);
 console.log('# (score, index)  sentence');
 result.forEach(function(meta) { // sorted by score
   console.log('(' + meta.score + ', ' + meta.idx + ')  ' + sentences[meta.idx]);
