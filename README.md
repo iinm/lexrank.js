@@ -6,10 +6,7 @@ LexRank computes centrality score of sentences.
 
 ## Demo application
 
-### Automatic text summarization / テキスト自動要約
-
 Demo application runs on client-side JavaScript. Input text is not sent to the server.
-/ クライアントサイドで動作します．入力されたテキストはサーバに送信されません．
 
 - <a href="http://iinm.github.io/lexrank.js/" target="_blank">Japanese / 日本語</a>
 - <a href="http://iinm.github.io/lexrank.js/index_en.html" target="_blank">English / 英語</a>
@@ -61,11 +58,23 @@ result.forEach(function(meta) { // sorted by score
 ## Default Parameters
 
 ```javascript
-var result = lexrank(sentences, {word_segmenter: (required),
-                                 idf: {}, // used when compute cos similarity
-                                 threshold: 0.1, // cos similarity
-                                 sort_by_score: true, // result
-                                 pagerank: { alpha: 0.85,
-                                             tol: 1.0e-6,
-                                             max_iter: 100 }});
+var result = lexrank(
+  sentences,
+  {
+    word_segmenter: (required),
+    continuous: false  // apply continuous LexRank, see reference
+    idf: {},  // used when compute cos similarity
+    threshold: 0.1,  // cos similarity, used when 'continuous' is false.
+    sort_by_score: true,  // sort result by score
+    pagerank_params: {
+      alpha: 0.85,
+      tol: 1.0e-6,
+      max_iter: 100
+    }
+  }
+);
 ```
+
+## References
+
+[LexRank](http://www.cs.cmu.edu/afs/cs/project/jair/pub/volume22/erkan04a-html/erkan04a.html), section 3.1-3.3
