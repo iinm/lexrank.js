@@ -58,8 +58,13 @@ function summarize() {
 
   var sentences = sent_splitter(text);
   console.log(sentences);
-  var result = lexrank(sentences, {word_segmenter: word_segmenter})
-                 .slice(0, num_sent);
+  var result = lexrank(
+    sentences,
+    {
+      word_segmenter: word_segmenter,
+      continuous: true
+    }
+  ).slice(0, num_sent);
   //console.log(result);
   var score_max = result[0].score;
   var score_min = result.slice(-1)[0].score;

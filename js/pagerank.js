@@ -1,22 +1,28 @@
-// pagerank.js
-//
-// based on networkx.pagerank 1.9.1 (Python)
-// https://github.com/networkx/networkx/blob/master/networkx/algorithms/link_analysis/pagerank_alg.py
-
 function pagerank(G, params) {
+  // based on networkx.pagerank 1.9.1 (Python)
+  // https://github.com/networkx/networkx/blob/master/networkx/algorithms/link_analysis/pagerank_alg.py
 
   // set default parameters
-  if (params == null) params = {};
-  if (params.alpha == null) params.alpha = 0.85;
-  if (params.tol == null) params.tol = 1.0e-6;
-  if (params.max_iter == null) params.max_iter = 100;
+  if (!params) params = {};
+  if (!params.alpha) params.alpha = 0.85;
+  if (!params.personalization) params.personalization = null;
+  if (!params.max_iter) params.max_iter = 100;
+  if (!params.tol) params.tol = 1.0e-6;
+  if (!params.weight) params.weight = 'weight'
 
-  // tools
+  // Begin tools
+  var values = function(obj) {
+    var xs = [];
+    for (var key in obj) xs.push(obj[key]);
+    return xs;
+  };
+
   var sum = function(xs) {
     return xs.reduce(function(prev, current, idx, xs) {
       return prev + current;
     });
   };
+  // End tools
 
   var N = Object.keys(G).length
   if (N == 0) return {};
@@ -25,19 +31,24 @@ function pagerank(G, params) {
   var W = {}
   for (var node in G) {
     var nodes = G[node];
-    var num_nodes = nodes.length;
     var new_nodes = {};
-    //for (var node_ in nodes) {
-    nodes.forEach(function(node_) {
-      new_nodes[node_] = {'weight': 1.0 / num_nodes};
-    });
+    var node_degree = .0;
+    for (var node_ in nodes) {
+      node_degree += nodes[node_][params.weight]
+    }
+    for (var node_ in nodes) {
+      new_nodes[node_] = {
+        'weight': 
+          (params.weight ? nodes[node_][params.weight] : 1.0) / node_degree
+      };
+    }
     W[node] = new_nodes;
   }
   //console.log(W);
 
   // Choose fixed starting vector if not given
   var x = {};
-  if (params.nstart == null) {
+  if (!params.nstart) {
     for (var node in W) x[node] = 1.0 / N;
   }
   else {
@@ -49,7 +60,7 @@ function pagerank(G, params) {
   //console.log(x);
 
   p = {};
-  if (params.personalization == null) {
+  if (!params.personalization) {
     // Assign uniform personalization vector if not given
     for (var node in W) p[node] = 1.0 / N;
   }
@@ -61,7 +72,7 @@ function pagerank(G, params) {
   }
 
   var dangling_weights = {};
-  if (params.dangling == null) {
+  if (!params.dangling) {
     // Use personalization vector if dangling vector not specified
     dangling_weights = p;
   }
@@ -113,11 +124,6 @@ function pagerank(G, params) {
 }
 
 // node.js
-//module.exports = pagerank;
-
-// test
-//var scores = pagerank({1: [2, 3, 4], 2: [3], 3: [4], 4: []}, {alpha: 0.9});
-//console.log(scores);
-//
-//var scores = pagerank({'foo': ['bar', 'hoge'], 'bar': [], 'hoge': ['foo']});
-//console.log(scores);
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = pagerank;
+}
