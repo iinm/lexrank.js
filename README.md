@@ -4,7 +4,7 @@ LexRank computes centrality score of sentences.
 
 - requires [pagerank.js](https://github.com/iinm/pagerank.js)
 
-## Demo application
+## Demo application (sentence extraction)
 
 Demo application runs on client-side JavaScript. Input text is not sent to the server.
 
